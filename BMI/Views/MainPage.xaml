@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMI.Views.MainPage"
+             xmlns:vm="clr-namespace:BMI.Models"
+             xmlns:conv="clr-namespace:BMI.Coverters"
+             x:DataType="vm:BmiViewModel">
+    <ContentPage.Resources>
+        <conv:BmiToColor x:Key="Bmi2Color"/>
+    </ContentPage.Resources>
+    <Grid>
+        <VerticalStackLayout HorizontalOptions="Center" Padding="0,20" Spacing="20">
+            <Label Text="BMI Calculator" FontSize="Large" TextColor="#531DAA" HorizontalOptions="Center"/>
+            <!--#region Panel Height-->
+            <StackLayout Orientation="Vertical">
+                <HorizontalStackLayout Margin="0,10">
+                    <Label Text="Your height:" VerticalOptions="Center" />
+                    <Label Text="{Binding TextHeight}" Margin="10,0" FontAttributes="Bold" TextColor="#21751D" FontSize="Large"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                    <ImageButton Source="reduce_50px.png" Margin="10,0" Command="{Binding MinusHeightCommand}"/>
+                    <Slider Value="{Binding Height}" Maximum="230" Minimum="50" WidthRequest="200" VerticalOptions="Center"/>
+                    <ImageButton Source="add_new_50px.png" Margin="10,0" Command="{Binding PlusHeightCommand}"/>
+                </HorizontalStackLayout>
+                
+            </StackLayout>
+            <!--#endregion-->
+            <!--#region Panel Weight-->
+            <StackLayout Orientation="Vertical">
+                <HorizontalStackLayout Margin="0,10">
+                    <Label Text="Your weight:" VerticalOptions="Center" />
+                    <Label Text="{Binding TextWeight}" Margin="10,0" FontAttributes="Bold" TextColor="#FF6100" FontSize="Large"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                    <ImageButton Source="reduce_50px.png" Margin="10,0" Command="{Binding MinusWeightCommand}" />
+                    <Slider Value="{Binding Weight}" Maximum="200" Minimum="30" WidthRequest="200" VerticalOptions="Center"/>
+                    <ImageButton Source="add_new_50px.png" Margin="10,0" Command="{Binding PlusWeightCommand}" />
+                </HorizontalStackLayout>
+                
+            </StackLayout>
+            <!--#endregion-->
+            <StackLayout Orientation="Vertical" Margin="0,20" WidthRequest="200" Spacing="20">
+                <Label Text=" Your BMI is" HorizontalOptions="CenterAndExpand" />
+                <Label Text="{Binding BMIndex}" HorizontalOptions="Center" FontSize="48" FontAttributes="Bold" TextColor="{Binding BMIndex, Converter={StaticResource Bmi2Color}} "/>
+                <Label Text="{Binding Estimate}" HorizontalOptions="Center"/>
+            </StackLayout>
+            
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
